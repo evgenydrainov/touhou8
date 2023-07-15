@@ -1,0 +1,23 @@
+; name              texture             u       v       width   height  xorigin yorigin frame_count frames_in_row   anim_spd    loop_frame  border
+enemy_label         Fonts               16      256     48      16      24      0
+
+player_hitbox       MoF-Characters      192     144     64      64      32      32
+reimu_idle          MoF-Characters      0       0       32      48      16      24      8           8               0.20
+reimu_move_left     MoF-Characters      0       48      32      48      16      24      8           8               0.20        4
+reimu_move_right    MoF-Characters      0       96      32      48      16      24      8           8               0.20        4
+reimu_card          MoF-Characters      0       144     16      16      8       8
+reimu_orb_shot      MoF-Characters      16      144     16      16      8       8
+
+pickup              PCB-Bullets         0       320     16      16      8       8       16
+lazer               PCB-Bullets         0       0       16      16      8       0       16
+bullet0             PCB-Bullets         0       16      16      16      8       8       16
+bullet1             PCB-Bullets         0       32      16      16      8       8       16
+bullet2             PCB-Bullets         0       48      16      16      8       8       16
+bullet3             PCB-Bullets         0       64      16      16      8       8       16
+bullet4             PCB-Bullets         0       80      16      16      8       8       16
+bullet5             PCB-Bullets         0       96      16      16      8       8       16
+bullet6             PCB-Bullets         0       240     8       8       4       4       16          8
+
+cirno_idle          PoFV-Cirno          176     160     64      64      32      32      4           4               0.20
+;cirno_move_right
+;cirno_move_left

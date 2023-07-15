@@ -1,3 +1,4 @@
+-- Nonspell 1
 function Boss0_Phase0(id)
 	local function shoot_radial_bullets()
 		return ShootRadial(17, 360 / 17, function()
@@ -53,6 +54,7 @@ function Boss0_Phase0(id)
 	end
 end
 
+-- Ice Sign "Icicle Fall"
 function Boss0_Phase1(id)
 	while true do
 		for i = 0, 10 do
@@ -92,6 +94,7 @@ function Boss0_Phase1(id)
 	end
 end
 
+-- Nonspell 2
 function Boss0_Phase2(id)
 	while true do
 		Wander(id)
@@ -122,6 +125,7 @@ function Boss0_Phase2(id)
 	end
 end
 
+-- Freeze Sign "Perfect Freeze"
 function Boss0_Phase3(id)
 	while true do
 		local bullets = {}
@@ -170,6 +174,7 @@ function Boss0_Phase3(id)
 	end
 end
 
+-- Snow Sign "Diamond Blizzard"
 function Boss0_Phase4(id)
 	while true do
 		for i = 1, 30 do

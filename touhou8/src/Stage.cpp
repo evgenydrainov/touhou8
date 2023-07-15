@@ -22,6 +22,9 @@
 
 #define POINT_OF_COLLECTION 96.0f
 
+#define PHYSICS_DELTA (60.0f / 300.0f) // 300 fps
+#define CORO_DELTA 1.0f
+
 #include "ScriptGlue.h"
 
 #include "bg_spellcard_cirno.h"
@@ -322,10 +325,9 @@ namespace th {
 
 		// Physics
 		{
-			float physics_update_rate = 1.0f / 300.0f; // 300 fps
 			float physics_timer = delta * /*g_stage->gameplay_delta*/1.0f;
 			while (physics_timer > 0.0f) {
-				float pdelta = std::min(physics_timer, physics_update_rate * 60.0f);
+				float pdelta = std::min(physics_timer, PHYSICS_DELTA);
 				PhysicsUpdate(pdelta);
 				physics_timer -= pdelta;
 			}
@@ -333,10 +335,13 @@ namespace th {
 
 		// Scripts
 		{
+			lua_pushnumber(L, CORO_DELTA);
+			lua_setglobal(L, "delta");
+
 			coro_update_timer += delta;
-			while (coro_update_timer >= 1.0f) {
+			while (coro_update_timer >= CORO_DELTA) {
 				CallCoroutines();
-				coro_update_timer -= 1.0f;
+				coro_update_timer -= CORO_DELTA;
 			}
 
 			for (size_t enemy_idx = 0; enemy_idx < enemies.size(); enemy_idx++) {

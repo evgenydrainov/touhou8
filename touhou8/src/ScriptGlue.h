@@ -15,14 +15,14 @@ namespace th {
 		if (ref == LUA_REFNIL) {
 			return true;
 		}
-	
+
 		lua_rawgeti(L, LUA_REGISTRYINDEX, ref);
 		if (!lua_isfunction(L, -1)) {
 			LOG("CallLuaFunction: not a function");
 			lua_pop(L, 1);
 			return false;
 		}
-	
+
 		lua_pushinteger(L, full_id);
 		int res = lua_pcall(L, 1, 0, 0);
 		if (res != LUA_OK) {
@@ -30,7 +30,7 @@ namespace th {
 			lua_pop(L, 1);
 			return false;
 		}
-	
+
 		return true;
 	}
 
@@ -221,8 +221,8 @@ namespace th {
 		lua_pushnumber(L, (lua_Number) subtime);
 		lua_rawsetp(L, LUA_REGISTRYINDEX, LUA_REG_SLOT_TIMER);
 
-		if (subtime >= 1.0f) {
-			subtime -= 1.0f;
+		if (subtime >= CORO_DELTA) {
+			subtime -= CORO_DELTA;
 
 			lua_pushnumber(L, (lua_Number) subtime);
 			lua_rawsetp(L, LUA_REGISTRYINDEX, LUA_REG_SLOT_TIMER);

@@ -59,11 +59,11 @@ function range(n)
 end
 
 function wait(t)
-	while t>=1 do
+	while t >= delta do
 		coroutine.yield()
-		t=t-1
+		t = t - delta
 	end
-	if t>0 then
+	if t > 0 then
 		_subwait(t)
 	end
 end

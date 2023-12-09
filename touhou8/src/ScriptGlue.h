@@ -357,8 +357,42 @@ namespace th {
 
 
 
+	// static void *l_alloc (void *ud, void *ptr, size_t osize,
+	// 					  size_t nsize) {
+	// 	if (nsize == 0) {
+	// 		free(ptr);
+	// 		return NULL;
+	// 	} else if (!ptr) {
+	// 		static int i = 0;
+	// 		printf("[%d] allocated %zu bytes\n", i++, nsize);
+	// 		return malloc(nsize);
+	// 	} else {
+	// 		return realloc(ptr, nsize);
+	// 	}
+	// }
+
+	static void *l_alloc (void *ud, void *ptr, size_t osize,
+						  size_t nsize) {
+		Loki::SmallObjAllocator* allocator = (Loki::SmallObjAllocator*) ud;
+		if (nsize == 0) {
+			if (ptr) allocator->Deallocate(ptr, osize);
+			return NULL;
+		} else if (!ptr) {
+			// static int i = 0;
+			// printf("[%d] allocated %zu bytes\n", i++, nsize);
+			return allocator->Allocate(nsize, false);
+		} else {
+			void* newptr = allocator->Allocate(nsize, false);
+			memcpy(newptr, ptr, std::min(osize, nsize));
+			allocator->Deallocate(ptr, osize);
+			return newptr;
+		}
+	}
+
 	void Stage::InitLua() {
-		L = luaL_newstate();
+		// L = luaL_newstate();
+		// L = lua_newstate(l_alloc, NULL);
+		L = lua_newstate(l_alloc, &lua_allocator);
 
 		{
 			luaL_Reg loadedlibs[] = {

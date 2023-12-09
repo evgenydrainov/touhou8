@@ -6,6 +6,8 @@
 
 #include <vector>
 
+#include <external/SmallObj.h>
+
 #define PLAY_AREA_W 384
 #define PLAY_AREA_H 448
 
@@ -61,6 +63,7 @@ namespace th {
 		xorshf96 random;
 		lua_State* L = nullptr;
 		int coroutine = LUA_REFNIL;
+		Loki::SmallObjAllocator lua_allocator = {};
 
 		InputState player_input[MAX_PLAYERS]{};
 		Player players[MAX_PLAYERS]{};

@@ -153,6 +153,8 @@ namespace th {
 			ResetPlayer(player_index, false);
 		}
 
+		lua_allocator.Init(2ULL * LOKI_DEFAULT_CHUNK_SIZE, 4ULL * LOKI_MAX_SMALL_OBJECT_SIZE, LOKI_DEFAULT_OBJECT_ALIGNMENT);
+
 		InitLua();
 	}
 
@@ -174,6 +176,8 @@ namespace th {
 
 		lua_close(L);
 		L = nullptr;
+
+		lua_allocator.Destroy();
 	}
 
 	void Stage::Update(float delta) {
